@@ -426,12 +426,12 @@ rule malicious_http {
     condition:
         $pattern
 }
-### 31. **Social Engineering**
-- **Tactic:** Initial Access  
-- **Technique:** T1071.001 - Web Protocols  
-- **Description:** Manipulating users into revealing confidential information or performing an action to compromise the system.
-- **YARA Rule:**
-```yara
+31. Social Engineering
+
+       Tactic:Initial Access  
+       Technique:T1071.001 - Web Protocols  
+       Description:Manipulating users into revealing confidential information or performing an action to compromise the system.
+
 rule social_engineering {
     strings:
         $pattern = "Click this link to update"
