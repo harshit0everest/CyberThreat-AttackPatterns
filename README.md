@@ -1,6 +1,6 @@
 # Attack Pattern Repository (MITRE ATT&CK Framework)
 
-This repository contains a collection of **40 attack patterns** that follow the **MITRE ATT&CK** framework. The repository is designed to help identify and defend against a range of **commercial**, **industrial**, and **web-based** attacks, including those targeting critical infrastructure and using various techniques.
+This repository contains a collection of **40 attack patterns** in JSON format that follow the **MITRE ATT&CK** framework. The repository is designed to help identify and defend against a range of **commercial**, **industrial**, and **web-based** attacks, including those targeting critical infrastructure and using various techniques.
 
 Each attack pattern is associated with the **tactic**, **technique**, a **description**, and **YARA rules** for **signature-based detection**. These attack patterns are categorized under the tactics outlined in the MITRE ATT&CK framework, such as **Initial Access**, **Execution**, **Persistence**, **Privilege Escalation**, **Command and Control**, **Exfiltration**, and **Impact**.
 
