@@ -1,6 +1,6 @@
 # Attack Patterns Repository
 
-This repository contains various attack patterns along with descriptions, impacts, and mitigation strategies. Each attack is described in its own markdown file, and can be expanded with examples and countermeasures.
+This file combines technical attack patterns, tactics/techniques, and signature-based detection using YARA rules for better visibility and protection against attacks. You can use these patterns to enhance your cybersecurity defenses and improve detection in your systems.
 
 ## List of Attack Patterns
 
