@@ -5,46 +5,45 @@ This repository contains a collection of **40 attack patterns** that follow the 
 Each attack pattern is associated with the **tactic**, **technique**, a **description**, and **YARA rules** for **signature-based detection**. These attack patterns are categorized under the tactics outlined in the MITRE ATT&CK framework, such as **Initial Access**, **Execution**, **Persistence**, **Privilege Escalation**, **Command and Control**, **Exfiltration**, and **Impact**.
 
 ## Table of Contents
-- [Overview](#overview)
-- [Attack Patterns](#attack-patterns)
-  - [1. SQL Injection](#1-sql-injection)
-  - [2. Cross-Site Scripting (XSS)](#2-cross-site-scripting-xss)
-  - [3. Command Injection](#3-command-injection)
-  - [4. Phishing](#4-phishing)
-  - [5. Man-in-the-Middle (MitM) Attack](#5-man-in-the-middle-mitm-attack)
-  - [6. Malware Infection](#6-malware-infection)
-  - [7. Denial of Service (DoS)](#7-denial-of-service-dos)
-  - [8. Ransomware](#8-ransomware)
-  - [9. Industrial Control System (ICS) Attacks](#9-industrial-control-system-ics-attacks)
-  - [10. Supply Chain Attack](#10-supply-chain-attack)
-  - [11. Buffer Overflow](#11-buffer-overflow)
-  - [12. Credential Stuffing](#12-credential-stuffing)
-  - [13. Privilege Escalation](#13-privilege-escalation)
-  - [14. Web Shell](#14-web-shell)
-  - [15. DNS Tunneling](#15-dns-tunneling)
-  - [16. Brute Force Attack](#16-brute-force-attack)
-  - [17. Lateral Movement](#17-lateral-movement)
-  - [18. Exfiltration Over Web Service](#18-exfiltration-over-web-service)
-  - [19. Spear Phishing](#19-spear-phishing)
-  - [20. Fileless Malware](#20-fileless-malware)
-  - [21. Application Layer DDoS](#21-application-layer-ddos)
-  - [22. Exploitation of Public-Facing Application](#22-exploitation-of-public-facing-application)
-  - [23. FTP Brute Force](#23-ftp-brute-force)
-  - [24. Exploit for Privilege Escalation](#24-exploit-for-privilege-escalation)
-  - [25. Command and Control over Web Shell](#25-command-and-control-over-web-shell)
-  - [26. PowerShell-based Attacks](#26-powershell-based-attacks)
-  - [27. Local File Inclusion (LFI)](#27-local-file-inclusion-lfi)
-  - [28. Exploit Web Application Vulnerabilities](#28-exploit-web-application-vulnerabilities)
-  - [29. Malicious PDF](#29-malicious-pdf)
-  - [30. T1071.001: Web Protocols - Malicious HTTP Requests](#30-t1071001-web-protocols---malicious-http-requests)
-  - [31. Social Engineering](#31-social-engineering)
-  - [32. Backdoor Access](#32-backdoor-access)
-  - [33. DNS Spoofing](#33-dns-spoofing)
-  - [34. Web Application Exploits](#34-web-application-exploits)
-  - [35. Infiltration of Industrial Control Systems](#35-infiltration-of-industrial-control-systems)
-  - [36. Botnet Usage](#36-botnet-usage)
-  - [37. Wi-Fi Eavesdropping](#37-wi-fi-eavesdropping)
-  - [38. USB Drops](#38-usb-drops)
-  - [39. Script-Based Attacks](#39-script-based-attacks)
-  - [40. Industrial IoT (IIoT) Exploits](#40-industrial-iot-iiot-exploits)
-
+- [Overview]
+- [Attack Patterns]
+  - 1. SQL Injection
+  - 2. Cross-Site Scripting (XSS)
+  - 3. Command Injection
+  - 4. Phishing
+  - 5. Man-in-the-Middle (MitM) Attack
+  - 6. Malware Infection
+  - 7. Denial of Service (DoS)
+  - 8. Ransomware
+  - 9. Industrial Control System (ICS) Attacks
+  - 10. Supply Chain Attack
+  - 11. Buffer Overflow
+  - 12. Credential Stuffing
+  - 13. Privilege Escalation
+  - 14. Web Shell
+  - 15. DNS Tunneling
+  - 16. Brute Force Attack
+  - 17. Lateral Movement
+  - 18. Exfiltration Over Web Service
+  - 19. Spear Phishing
+  - 20. Fileless Malware
+  - 21. Application Layer DDoS
+  - 22. Exploitation of Public-Facing Application
+  - 23. FTP Brute Force
+  - 24. Exploit for Privilege Escalation
+  - 25. Command and Control over Web Shell
+  - 26. PowerShell-based Attacks
+  - 27. Local File Inclusion (LFI)
+  - 28. Exploit Web Application Vulnerabilities
+  - 29. Malicious PDF
+  - 30. T1071.001: Web Protocols - Malicious HTTP Requests
+  - 31. Social Engineering
+  - 32. Backdoor Access
+  - 33. DNS Spoofing
+  - 34. Web Application Exploits
+  - 35. Infiltration of Industrial Control Systems
+  - 36. Botnet Usage
+  - 37. Wi-Fi Eavesdropping
+  - 38. USB Drops
+  - 39. Script-Based Attacks
+  - 40. Industrial IoT (IIoT) Exploits
