@@ -4,12 +4,12 @@ This repository includes **40 attack patterns** based on the **MITRE ATT&CK** fr
 
 ---
 
-### 1. **SQL Injection**
-- **Tactic:** Initial Access  
-- **Technique:** T1071.001 - Application Layer Protocol: Web Protocols  
-- **Description:** Malicious SQL queries to manipulate or exfiltrate data from the database.
-- **YARA Rule:**
-```yara
+ 1. SQL Injection
+
+       Tactic:Initial Access  
+       Technique:T1071.001 - Application Layer Protocol: Web Protocols  
+       Description:Malicious SQL queries to manipulate or exfiltrate data from the database.
+
 rule sql_injection {
     strings:
         $pattern1 = "UNION SELECT"
