@@ -4,564 +4,324 @@ This repository includes **40 attack patterns** based on the **MITRE ATT&CK** fr
 
 ---
 
- 1. SQL Injection
-
-       Tactic:Initial Access  
-       Technique:T1071.001 - Application Layer Protocol: Web Protocols  
-       Description:Malicious SQL queries to manipulate or exfiltrate data from the database.
-
-rule sql_injection {
-    strings:
-        $pattern1 = "UNION SELECT"
-        $pattern2 = "OR 1=1"
-    condition:
-        $pattern1 or $pattern2
-}
-
-2. Cross-Site Scripting (XSS)
-
-    Tactic: Initial Access
-    Technique: T1071.001 - Web Protocols
-    Description: Injecting malicious scripts into web pages to target users.
-    YARA Rule:
-
-rule xss_attack {
-    strings:
-        $pattern1 = "<script>"
-        $pattern2 = "</script>"
-    condition:
-        $pattern1 and $pattern2
-}
-
-3. Command Injection
-
-    Tactic: Initial Access
-    Technique: T1059.003 - Windows Command Shell
-    Description: Injecting malicious commands into system processes to execute arbitrary code.
-    YARA Rule:
-
-rule command_injection {
-    strings:
-        $pattern = "cmd.exe /c"
-    condition:
-        $pattern
-}
-
-4. Phishing
-
-    Tactic: Initial Access
-    Technique: T1071.001 - Web Protocols
-    Description: Sending fraudulent emails to steal credentials or install malware.
-    YARA Rule:
-
-rule phishing_email {
-    strings:
-        $pattern1 = "http://malicious-site.com"
-        $pattern2 = "click here"
-    condition:
-        $pattern1 and $pattern2
-}
-
-5. Man-in-the-Middle (MitM) Attack
-
-    Tactic: Credential Dumping
-    Technique: T1071.001 - Web Protocols
-    Description: Intercepting and possibly altering communications between two parties to steal data.
-    YARA Rule:
-
-rule mitm_attack {
-    strings:
-        $pattern1 = "Proxy-Connection: keep-alive"
-        $pattern2 = "X-Forwarded-For"
-    condition:
-        $pattern1 or $pattern2
-}
-
-6. Malware Infection
-
-    Tactic: Execution
-    Technique: T1059 - Command and Scripting Interpreter
-    Description: Installing and executing malicious software (e.g., ransomware, Trojans).
-    YARA Rule:
-
-rule malware_infection {
-    strings:
-        $pattern = "malicious.exe"
-    condition:
-        $pattern
-}
-
-7. Denial of Service (DoS)
-
-    Tactic: Impact
-    Technique: T1071.001 - Web Protocols
-    Description: Overloading a system to make it unavailable by flooding it with requests.
-    YARA Rule:
-
-rule dos_attack {
-    strings:
-        $pattern = "GET / HTTP/1.1"
-    condition:
-        $pattern
-}
-
-8. Ransomware
-
-    Tactic: Impact
-    Technique: T1486 - Data Encrypted for Impact
-    Description: Encrypting files and demanding payment for decryption.
-    YARA Rule:
-
-rule ransomware {
-    strings:
-        $pattern1 = "malware.exe"
-        $pattern2 = ".locked"
-    condition:
-        $pattern1 and $pattern2
-}
-
-9. Industrial Control System (ICS) Attacks
-
-    Tactic: Impact
-    Technique: T0816 - Industrial Control Systems
-    Description: Attacks targeting SCADA systems and critical infrastructure.
-    YARA Rule:
-
-rule ics_attack {
-    strings:
-        $pattern = "modbus.exe"
-    condition:
-        $pattern
-}
-
-10. Supply Chain Attack
-
-    Tactic: Initial Access
-    Technique: T1195 - Supply Chain Compromise
-    Description: Compromising third-party vendors to gain access to the target system.
-    YARA Rule:
-
-rule supply_chain_attack {
-    strings:
-        $pattern = "trusted_vendor_installer.exe"
-    condition:
-        $pattern
-}
-
-11. Buffer Overflow
-
-    Tactic: Execution
-    Technique: T1218.010 - Regsvr32
-    Description: Exploiting buffer overflow vulnerabilities in software to execute arbitrary code.
-    YARA Rule:
-
-rule buffer_overflow {
-    strings:
-        $pattern = "buffer_overflow_exploit.exe"
-    condition:
-        $pattern
-}
-
-12. Credential Stuffing
-
-    Tactic: Initial Access
-    Technique: T1110 - Brute Force
-    Description: Using automated tools to perform login attempts with stolen credentials.
-    YARA Rule:
-
-rule credential_stuffing {
-    strings:
-        $pattern = "Login failed for user"
-    condition:
-        $pattern
-}
-
-13. Privilege Escalation
-
-    Tactic: Privilege Escalation
-    Technique: T1078 - Valid Accounts
-    Description: Escalating privileges on a system by exploiting misconfigured accounts.
-    YARA Rule:
-
-rule privilege_escalation {
-    strings:
-        $pattern = "sudo"
-    condition:
-        $pattern
-}
-
-14. Web Shell
-
-    Tactic: Execution
-    Technique: T1071.001 - Web Protocols
-    Description: Malicious script used to maintain persistent control over a server.
-    YARA Rule:
-
-rule web_shell {
-    strings:
-        $pattern = "<iframe src=\"http://attacker.com/webshell.cgi\">"
-    condition:
-        $pattern
-}
-
-15. DNS Tunneling
-
-    Tactic: Exfiltration
-    Technique: T1071.001 - Web Protocols
-    Description: Exfiltrating data by encoding it into DNS queries.
-    YARA Rule:
-
-rule dns_tunneling {
-    strings:
-        $pattern = "example.com"
-    condition:
-        $pattern
-}
-
-16. Brute Force Attack
-
-    Tactic: Initial Access
-    Technique: T1110 - Brute Force
-    Description: Attempting to gain unauthorized access by guessing passwords.
-    YARA Rule:
-
-rule brute_force {
-    strings:
-        $pattern = "Too many failed login attempts"
-    condition:
-        $pattern
-}
-
-17. Lateral Movement
-
-    Tactic: Lateral Movement
-    Technique: T1021 - Remote Services
-    Description: Moving laterally within a network using remote services like RDP.
-    YARA Rule:
-
-rule lateral_movement {
-    strings:
-        $pattern = "Remote Desktop Protocol"
-    condition:
-        $pattern
-}
-
-18. Exfiltration Over Web Service
-
-    Tactic: Exfiltration
-    Technique: T1041 - Exfiltration Over Web Service
-    Description: Exfiltrating data via web services or cloud platforms.
-    YARA Rule:
-
-rule exfiltration_web_service {
-    strings:
-        $pattern = "/upload"
-    condition:
-        $pattern
-}
-
-19. Spear Phishing
-
-    Tactic: Initial Access
-    Technique: T1071.001 - Web Protocols
-    Description: Targeted phishing campaigns aimed at specific individuals.
-    YARA Rule:
-
-rule spear_phishing {
-    strings:
-        $pattern = "attachment.exe"
-    condition:
-        $pattern
-}
-
-20. Fileless Malware
-
-    Tactic: Execution
-    Technique: T1055 - Process Injection
-    Description: Malware that does not rely on traditional files to execute, often using legitimate system tools.
-    YARA Rule:
-
-rule fileless_malware {
-    strings:
-        $pattern = "powershell.exe"
-    condition:
-        $pattern
-}
-21. Application Layer DDoS
-
-    Tactic: Impact
-    Technique: T1071.001 - Application Layer Protocols
-    Description: Targeting application layers to cause resource exhaustion and unavailability.
-    YARA Rule:
-
-rule app_layer_ddos {
-    strings:
-        $pattern = "GET / HTTP/1.1"
-    condition:
-        $pattern
-}
-
-22. Exploitation of Public-Facing Application
-
-    Tactic: Initial Access
-    Technique: T1190 - Exploit Public-Facing Application
-    Description: Exploiting vulnerabilities in public-facing applications to gain unauthorized access.
-    YARA Rule:
-
-rule public_facing_exploit {
-    strings:
-        $pattern = "Remote Code Execution"
-    condition:
-        $pattern
-}
-
-23. File Transfer Protocol (FTP) Brute Force
-
-    Tactic: Initial Access
-    Technique: T1071.001 - Web Protocols
-    Description: Using brute force attacks on FTP services to gain access.
-    YARA Rule:
-
-rule ftp_brute_force {
-    strings:
-        $pattern = "530 Login incorrect"
-    condition:
-        $pattern
-}
-
-24. Exploit for Privilege Escalation
-
-    Tactic: Privilege Escalation
-    Technique: T1203 - Exploitation for Privilege Escalation
-    Description: Using known vulnerabilities to escalate privileges on the victim system.
-    YARA Rule:
-
-rule privilege_escalation_exploit {
-    strings:
-        $pattern = "exploit.exe"
-    condition:
-        $pattern
-}
-
-25. Command and Control over Web Shell
-
-    Tactic: Command and Control
-    Technique: T1071.001 - Web Protocols
-    Description: Maintaining access through web shells for ongoing command and control.
-    YARA Rule:
-
-rule web_shell_c2 {
-    strings:
-        $pattern = "http://attacker.com/cmd"
-    condition:
-        $pattern
-}
-
-26. PowerShell-based Attacks
-
-    Tactic: Execution
-    Technique: T1086 - PowerShell
-    Description: Using PowerShell to execute malicious commands or scripts.
-    YARA Rule:
-
-rule powershell_attack {
-    strings:
-        $pattern = "powershell -nop -w hidden"
-    condition:
-        $pattern
-}
-
-27. Local File Inclusion (LFI)
-
-    Tactic: Initial Access
-    Technique: T1071.001 - Web Protocols
-    Description: Exploiting a vulnerability in a web application to include local files.
-    YARA Rule:
-
-rule lfi_attack {
-    strings:
-        $pattern = "php://input"
-    condition:
-        $pattern
-}
-
-28. Exploit Web Application Vulnerabilities
-
-    Tactic: Initial Access
-    Technique: T1071.001 - Web Protocols
-    Description: Exploiting web application vulnerabilities to perform attacks.
-    YARA Rule:
-
-rule web_vuln_exploit {
-    strings:
-        $pattern = "SQL Injection"
-    condition:
-        $pattern
-}
-
-29. Malicious PDF
-
-    Tactic: Execution
-    Technique: T1071.001 - Web Protocols
-    Description: Using malicious PDFs to exploit vulnerabilities and deliver payloads.
-    YARA Rule:
-
-rule malicious_pdf {
-    strings:
-        $pattern = "%PDF"
-    condition:
-        $pattern
-}
-
-30. T1071.001: Web Protocols - Malicious HTTP Requests
-
-    Tactic: Command and Control
-    Technique: T1071.001 - Web Protocols
-    Description: Using HTTP for command and control communication.
-    YARA Rule:
-
-rule malicious_http {
-    strings:
-        $pattern = "POST /evil"
-    condition:
-        $pattern
-}
-31. Social Engineering
-
-       Tactic:Initial Access  
-       Technique:T1071.001 - Web Protocols  
-       Description:Manipulating users into revealing confidential information or performing an action to compromise the system.
-
-rule social_engineering {
-    strings:
-        $pattern = "Click this link to update"
-    condition:
-        $pattern
-}
-
-32. Backdoor Access
-
-    Tactic: Persistence
-    Technique: T1055 - Process Injection
-    Description: Installing backdoors to maintain persistent access to the system.
-    YARA Rule:
-
-rule backdoor_access {
-    strings:
-        $pattern = "backdoor.exe"
-    condition:
-        $pattern
-}
-
-33. DNS Spoofing
-
-    Tactic: Credential Dumping
-    Technique: T1071.001 - Web Protocols
-    Description: Poisoning DNS cache to redirect users to malicious websites or intercept traffic.
-    YARA Rule:
-
-rule dns_spoofing {
-    strings:
-        $pattern = "127.0.0.1 malicious.com"
-    condition:
-        $pattern
-}
-
-34. Web Application Exploits
-
-    Tactic: Initial Access
-    Technique: T1071.001 - Web Protocols
-    Description: Exploiting vulnerabilities in web applications such as cross-site scripting (XSS) or SQL injection.
-    YARA Rule:
-
-rule web_app_exploit {
-    strings:
-        $pattern = "http://vulnerable-site.com"
-    condition:
-        $pattern
-}
-
-35. Infiltration of Industrial Control Systems
-
-    Tactic: Impact
-    Technique: T0781 - Industrial Control Systems
-    Description: Gaining unauthorized access to industrial control systems, such as SCADA, to disrupt operations.
-    YARA Rule:
-
-rule ics_infiltration {
-    strings:
-        $pattern = "scada.exe"
-    condition:
-        $pattern
-}
-
-36. Botnet Usage
-
-    Tactic: Command and Control
-    Technique: T1071.001 - Web Protocols
-    Description: Using a botnet to control compromised devices and orchestrate attacks.
-    YARA Rule:
-
-rule botnet_usage {
-    strings:
-        $pattern = "botnetcommand"
-    condition:
-        $pattern
-}
-
-37. Wi-Fi Eavesdropping
-
-    Tactic: Reconnaissance
-    Technique: T1071.001 - Web Protocols
-    Description: Intercepting wireless communications to gather sensitive information.
-    YARA Rule:
-
-rule wifi_eavesdropping {
-    strings:
-        $pattern = "WEP-attack"
-    condition:
-        $pattern
-}
-
-38. USB Drops
-
-    Tactic: Initial Access
-    Technique: T1071.001 - Web Protocols
-    Description: Deploying infected USB drives to deliver malware or establish backdoors.
-    YARA Rule:
-
-rule usb_drop {
-    strings:
-        $pattern = "autorun.inf"
-    condition:
-        $pattern
-}
-
-39. Script-Based Attacks
-
-    Tactic: Execution
-    Technique: T1059.003 - Windows Command Shell
-    Description: Using scripts to execute malicious code on the victim’s machine, such as PowerShell, bash, etc.
-    YARA Rule:
-
-rule script_attack {
-    strings:
-        $pattern = "powershell -nop -w hidden"
-    condition:
-        $pattern
-}
-
-40. Industrial IoT (IIoT) Exploits
-
-    Tactic: Impact
-    Technique: T0781 - Industrial Control Systems
-    Description: Targeting vulnerabilities in Industrial IoT devices and networks to impact critical infrastructure.
-    YARA Rule:
-
-rule iiot_exploit {
-    strings:
-        $pattern = "iiot_device.exe"
-    condition:
-        $pattern
-}
-
+{
+  "attack_patterns": [
+    {
+      "id": 1,
+      "name": "SQL Injection",
+      "tactic": "Initial Access",
+      "technique": "T1071.001 - Application Layer Protocol: Web Protocols",
+      "description": "Malicious SQL queries to manipulate or exfiltrate data from the database.",
+      "yara_rule": "rule sql_injection { strings: $pattern1 = \"UNION SELECT\" $pattern2 = \"OR 1=1\" condition: $pattern1 or $pattern2 }"
+    },
+    {
+      "id": 2,
+      "name": "Cross-Site Scripting (XSS)",
+      "tactic": "Initial Access",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Injecting malicious scripts into web pages to target users.",
+      "yara_rule": "rule xss_attack { strings: $pattern1 = \"<script>\" $pattern2 = \"</script>\" condition: $pattern1 and $pattern2 }"
+    },
+    {
+      "id": 3,
+      "name": "Command Injection",
+      "tactic": "Initial Access",
+      "technique": "T1059.003 - Windows Command Shell",
+      "description": "Injecting malicious commands into system processes to execute arbitrary code.",
+      "yara_rule": "rule command_injection { strings: $pattern = \"cmd.exe /c\" condition: $pattern }"
+    },
+    {
+      "id": 4,
+      "name": "Phishing",
+      "tactic": "Initial Access",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Sending fraudulent emails to steal credentials or install malware.",
+      "yara_rule": "rule phishing_email { strings: $pattern1 = \"http://malicious-site.com\" $pattern2 = \"click here\" condition: $pattern1 and $pattern2 }"
+    },
+    {
+      "id": 5,
+      "name": "Man-in-the-Middle (MitM) Attack",
+      "tactic": "Credential Dumping",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Intercepting and possibly altering communications between two parties to steal data.",
+      "yara_rule": "rule mitm_attack { strings: $pattern1 = \"Proxy-Connection: keep-alive\" $pattern2 = \"X-Forwarded-For\" condition: $pattern1 or $pattern2 }"
+    },
+    {
+      "id": 6,
+      "name": "Malware Infection",
+      "tactic": "Execution",
+      "technique": "T1059 - Command and Scripting Interpreter",
+      "description": "Installing and executing malicious software (e.g., ransomware, Trojans).",
+      "yara_rule": "rule malware_infection { strings: $pattern = \"malicious.exe\" condition: $pattern }"
+    },
+    {
+      "id": 7,
+      "name": "Denial of Service (DoS)",
+      "tactic": "Impact",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Overloading a system to make it unavailable by flooding it with requests.",
+      "yara_rule": "rule dos_attack { strings: $pattern = \"GET / HTTP/1.1\" condition: $pattern }"
+    },
+    {
+      "id": 8,
+      "name": "Ransomware",
+      "tactic": "Impact",
+      "technique": "T1486 - Data Encrypted for Impact",
+      "description": "Encrypting files and demanding payment for decryption.",
+      "yara_rule": "rule ransomware { strings: $pattern1 = \"malware.exe\" $pattern2 = \".locked\" condition: $pattern1 and $pattern2 }"
+    },
+    {
+      "id": 9,
+      "name": "Industrial Control System (ICS) Attacks",
+      "tactic": "Impact",
+      "technique": "T0816 - Industrial Control Systems",
+      "description": "Attacks targeting SCADA systems and critical infrastructure.",
+      "yara_rule": "rule ics_attack { strings: $pattern = \"modbus.exe\" condition: $pattern }"
+    },
+    {
+      "id": 10,
+      "name": "Supply Chain Attack",
+      "tactic": "Initial Access",
+      "technique": "T1195 - Supply Chain Compromise",
+      "description": "Compromising third-party vendors to gain access to the target system.",
+      "yara_rule": "rule supply_chain_attack { strings: $pattern = \"trusted_vendor_installer.exe\" condition: $pattern }"
+    },
+    {
+      "id": 11,
+      "name": "Buffer Overflow",
+      "tactic": "Execution",
+      "technique": "T1218.010 - Regsvr32",
+      "description": "Exploiting buffer overflow vulnerabilities in software to execute arbitrary code.",
+      "yara_rule": "rule buffer_overflow { strings: $pattern = \"buffer_overflow_exploit.exe\" condition: $pattern }"
+    },
+    {
+      "id": 12,
+      "name": "Credential Stuffing",
+      "tactic": "Initial Access",
+      "technique": "T1110 - Brute Force",
+      "description": "Using automated tools to perform login attempts with stolen credentials.",
+      "yara_rule": "rule credential_stuffing { strings: $pattern = \"Login failed for user\" condition: $pattern }"
+    },
+    {
+      "id": 13,
+      "name": "Privilege Escalation",
+      "tactic": "Privilege Escalation",
+      "technique": "T1078 - Valid Accounts",
+      "description": "Escalating privileges on a system by exploiting misconfigured accounts.",
+      "yara_rule": "rule privilege_escalation { strings: $pattern = \"sudo\" condition: $pattern }"
+    },
+    {
+      "id": 14,
+      "name": "Web Shell",
+      "tactic": "Execution",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Malicious script used to maintain persistent control over a server.",
+      "yara_rule": "rule web_shell { strings: $pattern = \"<iframe src=\\\"http://attacker.com/webshell.cgi\\\">\" condition: $pattern }"
+    },
+    {
+      "id": 15,
+      "name": "DNS Tunneling",
+      "tactic": "Exfiltration",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Exfiltrating data by encoding it into DNS queries.",
+      "yara_rule": "rule dns_tunneling { strings: $pattern = \"example.com\" condition: $pattern }"
+    },
+    {
+      "id": 16,
+      "name": "Brute Force Attack",
+      "tactic": "Initial Access",
+      "technique": "T1110 - Brute Force",
+      "description": "Attempting to gain unauthorized access by guessing passwords.",
+      "yara_rule": "rule brute_force { strings: $pattern = \"Too many failed login attempts\" condition: $pattern }"
+    },
+    {
+      "id": 17,
+      "name": "Lateral Movement",
+      "tactic": "Lateral Movement",
+      "technique": "T1021 - Remote Services",
+      "description": "Moving laterally within a network using remote services like RDP.",
+      "yara_rule": "rule lateral_movement { strings: $pattern = \"Remote Desktop Protocol\" condition: $pattern }"
+    },
+    {
+      "id": 18,
+      "name": "Exfiltration Over Web Service",
+      "tactic": "Exfiltration",
+      "technique": "T1041 - Exfiltration Over Web Service",
+      "description": "Exfiltrating data via web services or cloud platforms.",
+      "yara_rule": "rule exfiltration_web_service { strings: $pattern = \"/upload\" condition: $pattern }"
+    },
+    {
+      "id": 19,
+      "name": "Spear Phishing",
+      "tactic": "Initial Access",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Targeted phishing campaigns aimed at specific individuals.",
+      "yara_rule": "rule spear_phishing { strings: $pattern = \"attachment.exe\" condition: $pattern }"
+    },
+    {
+      "id": 20,
+      "name": "Fileless Malware",
+      "tactic": "Execution",
+      "technique": "T1055 - Process Injection",
+      "description": "Malware that does not rely on traditional files to execute, often using legitimate system tools.",
+      "yara_rule": "rule fileless_malware { strings: $pattern = \"powershell.exe\" condition: $pattern }"
+    },
+    {
+      "id": 21,
+      "name": "Application Layer DDoS",
+      "tactic": "Impact",
+      "technique": "T1071.001 - Application Layer Protocols",
+      "description": "Targeting application layers to cause resource exhaustion and unavailability.",
+      "yara_rule": "rule app_layer_ddos { strings: $pattern = \"GET / HTTP/1.1\" condition: $pattern }"
+    },
+    {
+      "id": 22,
+      "name": "Exploitation of Public-Facing Application",
+      "tactic": "Initial Access",
+      "technique": "T1190 - Exploit Public-Facing Application",
+      "description": "Exploiting vulnerabilities in public-facing applications to gain unauthorized access.",
+      "yara_rule": "rule public_facing_exploit { strings: $pattern = \"Remote Code Execution\" condition: $pattern }"
+    },
+    {
+      "id": 23,
+      "name": "File Transfer Protocol (FTP) Brute Force",
+      "tactic": "Initial Access",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Using brute force attacks on FTP services to gain access.",
+      "yara_rule": "rule ftp_brute_force { strings: $pattern = \"530 Login incorrect\" condition: $pattern }"
+    },
+    {
+      "id": 24,
+      "name": "Exploit for Privilege Escalation",
+      "tactic": "Privilege Escalation",
+      "technique": "T1203 - Exploitation for Privilege Escalation",
+      "description": "Using known vulnerabilities to escalate privileges on the victim system.",
+      "yara_rule": "rule privilege_escalation_exploit { strings: $pattern = \"exploit.exe\" condition: $pattern }"
+    },
+    {
+      "id": 25,
+      "name": "Command and Control over Web Shell",
+      "tactic": "Command and Control",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Maintaining access through web shells for ongoing command and control.",
+      "yara_rule": "rule web_shell_c2 { strings: $pattern = \"http://attacker.com/cmd\" condition: $pattern }"
+    },
+    {
+      "id": 26,
+      "name": "PowerShell-based Attacks",
+      "tactic": "Execution",
+      "technique": "T1086 - PowerShell",
+      "description": "Using PowerShell to execute malicious commands or scripts.",
+      "yara_rule": "rule powershell_attack { strings: $pattern = \"powershell -nop -w hidden\" condition: $pattern }"
+    },
+    {
+      "id": 27,
+      "name": "Local File Inclusion (LFI)",
+      "tactic": "Initial Access",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Exploiting a vulnerability in a web application to include local files.",
+      "yara_rule": "rule lfi_attack { strings: $pattern = \"php://input\" condition: $pattern }"
+    },
+    {
+      "id": 28,
+      "name": "Exploit Web Application Vulnerabilities",
+      "tactic": "Initial Access",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Exploiting web application vulnerabilities to perform attacks.",
+      "yara_rule": "rule web_vuln_exploit { strings: $pattern = \"SQL Injection\" condition: $pattern }"
+    },
+    {
+      "id": 29,
+      "name": "Malicious PDF",
+      "tactic": "Execution",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Using malicious PDFs to exploit vulnerabilities and deliver payloads.",
+      "yara_rule": "rule malicious_pdf { strings: $pattern = \"%PDF\" condition: $pattern }"
+    },
+    {
+      "id": 30,
+      "name": "T1071.001: Web Protocols - Malicious HTTP Requests",
+      "tactic": "Command and Control",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Using HTTP for command and control communication.",
+      "yara_rule": "rule malicious_http { strings: $pattern = \"POST /evil\" condition: $pattern }"
+    },
+    {
+      "id": 31,
+      "name": "Social Engineering",
+      "tactic": "Initial Access",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Manipulating users into revealing confidential information or performing an action to compromise the system.",
+      "yara_rule": "rule social_engineering { strings: $pattern = \"Click this link to update\" condition: $pattern }"
+    },
+    {
+      "id": 32,
+      "name": "Backdoor Access",
+      "tactic": "Persistence",
+      "technique": "T1055 - Process Injection",
+      "description": "Installing backdoors to maintain persistent access to the system.",
+      "yara_rule": "rule backdoor_access { strings: $pattern = \"backdoor.exe\" condition: $pattern }"
+    },
+    {
+      "id": 33,
+      "name": "DNS Spoofing",
+      "tactic": "Credential Dumping",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Poisoning DNS cache to redirect users to malicious websites or intercept traffic.",
+      "yara_rule": "rule dns_spoofing { strings: $pattern = \"127.0.0.1 malicious.com\" condition: $pattern }"
+    },
+    {
+      "id": 34,
+      "name": "Web Application Exploits",
+      "tactic": "Initial Access",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Exploiting vulnerabilities in web applications such as cross-site scripting (XSS) or SQL injection.",
+      "yara_rule": "rule web_app_exploit { strings: $pattern = \"http://vulnerable-site.com\" condition: $pattern }"
+    },
+    {
+      "id": 35,
+      "name": "Infiltration of Industrial Control Systems",
+      "tactic": "Impact",
+      "technique": "T0781 - Industrial Control Systems",
+      "description": "Gaining unauthorized access to industrial control systems, such as SCADA, to disrupt operations.",
+      "yara_rule": "rule ics_infiltration { strings: $pattern = \"scada.exe\" condition: $pattern }"
+    },
+    {
+      "id": 36,
+      "name": "Botnet Usage",
+      "tactic": "Command and Control",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Using a botnet to control compromised devices and orchestrate attacks.",
+      "yara_rule": "rule botnet_usage { strings: $pattern = \"botnetcommand\" condition: $pattern }"
+    },
+    {
+      "id": 37,
+      "name": "Wi-Fi Eavesdropping",
+      "tactic": "Reconnaissance",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Intercepting wireless communications to gather sensitive information.",
+      "yara_rule": "rule wifi_eavesdropping { strings: $pattern = \"WEP-attack\" condition: $pattern }"
+    },
+    {
+      "id": 38,
+      "name": "USB Drops",
+      "tactic": "Initial Access",
+      "technique": "T1071.001 - Web Protocols",
+      "description": "Deploying infected USB drives to deliver malware or establish backdoors.",
+      "yara_rule": "rule usb_drop { strings: $pattern = \"autorun.inf\" condition: $pattern }"
+    },
+    {
+      "id": 39,
+      "name": "Script-Based Attacks",
+      "tactic": "Execution",
+      "technique": "T1059.003 - Windows Command Shell",
+      "description": "Using scripts to execute malicious code on the victim’s machine, such as PowerShell, bash, etc.",
+      "yara_rule": "rule script_attack { strings: $pattern = \"powershell -nop -w hidden\" condition: $pattern }"
+    },
+    {
+      "id": 40,
+      "name": "Industrial IoT (IIoT) Exploits",
+      "tactic": "Impact",
+      "technique": "T0781 - Industrial Control Systems",
+      "description": "Targeting vulnerabilities in Industrial IoT devices and networks to impact critical infrastructure.",
+      "yara_rule": "rule iiot_exploit { strings: $pattern = \"iiot_device.exe\" condition: $pattern }
