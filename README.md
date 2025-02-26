@@ -34,7 +34,7 @@ Each attack pattern is associated with the **tactic**, **technique**, a **descri
   - Local File Inclusion (LFI)
   - Exploit Web Application Vulnerabilities
   - Malicious PDF
-  - T1071.001: Web Protocols - Malicious HTTP Requests
+  - Web Protocols - Malicious HTTP Requests
   - Social Engineering
   - Backdoor Access
   - DNS Spoofing
