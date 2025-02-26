@@ -1,6 +1,6 @@
 # Attack Patterns Repository
 
-This file combines technical attack patterns, tactics/techniques, and signature-based detection using YARA rules for better visibility and protection against attacks. You can use these patterns to enhance your cybersecurity defenses and improve detection in your systems.
+This file combines technical attack patterns, tactics/techniques, and signature-based detection using YARA rules for better visibility and protection against attacks. You can use these patterns to enhance our cybersecurity defenses and improve detection in your systems.
 
 ## List of Attack Patterns
 
